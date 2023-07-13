@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
+    <script src="https://cdn.socket.io/4.6.0/socket.io.min.js" 
+    integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.js" 
+    integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='/picture/favicon.png') }}">
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <div id="nav-sticky">
+        <nav id="nav-container">
+            <p id="logo"><a href="/" id="logo-a">LOGO.</a></p>
+            <div id="nav-buttons-container">
+                <a href="/" class="nav-button">Home</a>
+                <a href="#" class="nav-button">Approach</a>
+                <a href="/about_us" class="nav-button">About us</a>
+            </div>
+            <button class="dropbtn open" id="menu-dropdown-btn"></button>
+        </nav>
+    </div>
+    <div id="menu-dropdown" class="dropdown-content">
+        <a href="/">Home</a>
+        <hr>
+        <a href="#">Approach</a>
+        <hr>
+        <a href="/about_us">About us</a>
+        <hr>
+    </div>
+    <script src="{{ url_for('static', filename='js/dropdown.js') }}"></script>
+    {% block body %}{% endblock %}
+    <div id="footer">
+        <p>created for AI final project</p>
+    </div>
+</body>
+</html>

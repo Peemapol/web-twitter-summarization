@@ -1,0 +1,158 @@
+@import url('https://fonts.cdnfonts.com/css/chirp-2');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    /* margin and padding */
+    --margin-mobile: 20px;
+    --margin-pc: 50px;
+    --margin-basic-info-pc: 100px;
+    --margin-about-us: 100px;
+    
+    /* font */
+    /* --main-font: "Segoe UI", Arial, sans-serif; */
+    --main-font: 'Chirp', sans-serif;
+
+    /* color pallet */
+    --blue-twitter: #1DA1F2;
+    --hover-blue-twitter: #1d97e3;
+    --black-twitter: #16202A;
+    --dark-gray-twiiter: #657786;
+    --light-gray-twitter: #AAB8C2;
+    --extra-light-gray: #E1E8ED;
+    --extra-extra-light-gray: #F5F8FA;
+}
+html {
+    height: 100%;
+}
+:root{
+    font-size: 16px;
+}
+body{
+    background-color: var(--black-twitter);
+    overflow-x: hidden;
+}
+
+/* nav */
+#nav-sticky{
+    background-color: var(--blue-twitter);
+}
+#logo > a{
+    color: var(--extra-extra-light-gray);
+}
+
+#about-us-title-container{
+    padding: 150px 0 150px 0;
+    text-align: center;
+    background-color: var(--blue-twitter);
+}
+#who-we-are{
+    color: var(--extra-extra-light-gray);
+    font-family: var(--main-font);
+    font-size: 1rem;
+    word-spacing: 10px;
+    display: block;
+    margin-bottom: 10px;
+}
+#big-about-us{
+    color: var(--extra-extra-light-gray);
+    font-family: var(--main-font);
+    font-size: 4rem;
+    display: block;
+}
+#project-background{
+    padding: 150px var(--margin-mobile) 150px var(--margin-mobile);
+    text-align: left;
+}
+.background-title{
+    display: block;
+    font-family: var(--main-font);
+    color: var(--blue-twitter);
+    font-size: 4rem;
+    margin-bottom: 5px;
+}
+.background-description{
+    display: block;
+    font-family: var(--main-font);
+    color: var(--extra-extra-light-gray);
+    font-size: 1rem;
+}
+.background-container{
+    margin-bottom: 50px;
+}
+img{
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+#team-section{
+    padding: 150px var(--margin-mobile) 50px var(--margin-mobile);
+    background-color: var(--extra-extra-light-gray);
+}
+.member-title{
+    display: block;
+    font-family: var(--main-font);
+    color: var(--black-twitter);
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+.student-name{
+    color: var(--black-twitter);
+    font-family: var(--main-font);
+    font-size: 1.5rem;
+}
+.student-number{
+    color: var(--blue-twitter);
+    font-family: var(--main-font);
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+.jd-list{
+    color: var(--black-twitter);
+    font-family: var(--main-font);
+    font-size: 1rem;
+    list-style-type: circle;
+}
+.member{
+    display: flex;
+}
+.member-description{
+    margin-left: auto;
+}
+
+#footer{
+    background-color: var(--extra-extra-light-gray);
+}
+
+@media (min-width: 769px){
+    #about-us-title-container{
+        padding: 200px 0 200px 0;
+    }
+    #who-we-are{
+        font-size: 1rem;
+    }
+    #big-about-us{
+        font-size: 10rem;
+    }
+    img{
+        margin-bottom: 10px;
+    }
+    #project-background{
+        padding: 150px var(--margin-about-us) 150px var(--margin-about-us);
+        display: flex;
+        gap: 100px;
+    }
+    #team-section{
+        padding: 100px var(--margin-about-us) 100px var(--margin-about-us);
+    }
+    #member-section{
+        display: flex;
+        justify-content: space-between;
+    }
+    .member{
+        display: block;
+    }
+}

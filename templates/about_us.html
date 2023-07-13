@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/about_us.css') }}">
+<title>Twitter Summary</title>
+{% endblock %}
+
+{% block body %}
+
+<div id="about-us-title-container">
+    <p id="who-we-are">WHO WE ARE</p>
+    <p id="big-about-us">About Us</p>
+</div>
+
+<div id="project-background">
+    <div class="background-container">
+        <p class="background-title">Background</p>
+        <p class="background-description">
+            This project was initiated upon observing the increasing advancement in Natural Language Processing technology, 
+            particularly the notable projects of ChatGPT by OpenAI and Bard by Google, which have served as sources 
+            of inspiration for us in creating a machine learning model that can achieve similar feats. However, due to constraints on time and 
+            our vested interest in social media, we have narrowed down the project scope to the summarization of hashtags sourced from Twitter.
+        </p>
+    </div>
+    <div class="background-container">
+        <p class="background-title">User Problem</p>
+        <p class="background-description">We conducted user testing to evaluate the viability of our AI-based solution for assisting Twitter users, 
+            and the results revealed certain issues that our product can address. These include spam tweets, dissemination 
+            of false information, and the presence of an overwhelming amount of contextual information within a single hashtag. 
+            Our product is designed to display only the key ideas of a given topic, thereby enabling us to overcome these challenges.
+        </p>
+    </div>
+</div>
+
+<div id="team-section">
+    <p class="member-title">Our Team Members</p>
+    <div id="member-section">
+        <div class="member">
+            <img src="static\picture\Golf.jpg" alt="Golf">
+            <div class="member-description">
+                <p class="student-name">Athit</p>
+                <p class="student-name">Arsirakarn</p>
+                <p class="student-number">6238235021</p>
+                <ul>
+                    <li class="jd-list">Researching</li>
+                    <li class="jd-list">Literature Review</li>
+                    <li class="jd-list">Model Assistance</li>
+                </ul>
+            </div>
+        </div>
+        <div class="member">
+            <img src="static\picture\Beam.jpg" alt="Golf">
+            <div class="member-description">
+                <p class="student-name">Peemapol</p>
+                <p class="student-name">Tangamonsiri</p>
+                <p class="student-number">6238162821</p>
+                <ul>
+                    <li class="jd-list">Data Scraping</li>
+                    <li class="jd-list">Web Application</li>
+                </ul>
+            </div>
+        </div>
+        <div class="member">
+            <img src="static\picture\Non.jpg" alt="Golf">
+            <div class="member-description">
+                <p class="student-name">Pirat</p>
+                <p class="student-name">Pothavorn</p>
+                <p class="student-number">6238146821</p>
+                <ul>
+                    <li class="jd-list">Model Development</li>
+                    <li class="jd-list">Troubleshooter</li>
+                </ul>
+            </div>
+        </div>
+        <div class="member">
+            <img src="static\picture\Earth.jpg" alt="Golf">
+            <div class="member-description">
+                <p class="student-name">Thanachot</p>
+                <p class="student-name">Sappakit</p>
+                <p class="student-number">6238074221</p>
+                <ul>
+                    <li class="jd-list">Researching</li>
+                    <li class="jd-list">Data Preprocessing</li>
+                    <li class="jd-list">Inspiring Others</li>
+                </ul>
+            </div>
+        </div>    
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/aboutUsNav.js') }}"></script>
+{% endblock %}

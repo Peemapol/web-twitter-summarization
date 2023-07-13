@@ -1,0 +1,175 @@
+@import url('https://fonts.cdnfonts.com/css/chirp-2');
+/* @font-face {
+    font-family: twitterFont;
+    src: url('https://fonts.cdnfonts.com/css/chirp-2');
+    unicode-range: U+0020-007F;
+} */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    /* margin and padding */
+    --margin-mobile: 20px;
+    --margin-pc: 50px;
+    
+    /* font */
+    /* --main-font: "Segoe UI", Arial, sans-serif; */
+    --main-font: 'Chirp', sans-serif;
+
+    /* color pallet */
+    --blue-twitter: #1DA1F2;
+    --black-twitter: #16202A;
+    --dark-gray-twiiter: #657786;
+    --light-gray-twitter: #AAB8C2;
+    --extra-light-gray: #E1E8ED;
+    --extra-extra-light-gray: #F5F8FA;
+}
+
+html {
+    height: 100%;
+}
+:root{
+    font-size: 16px;
+}
+body{
+    background-color: var(--black-twitter);
+}
+
+/* ------------------------------ nav bar ------------------------------ */
+#nav-container{
+    display: flex;
+    font-family: var(--main-font);
+    align-items: center;
+    margin-left: var(--margin-mobile);
+}
+#nav-sticky{
+    position: fixed;
+    top: 0;
+    display: block;
+    transition: top 0.5s;
+    width: 100%;
+    background-color: var(--black-twitter);
+    padding: 15px 0 15px 0;
+}
+#logo{
+    margin-right: auto;
+    color: var(--blue-twitter);
+    font-size: 2rem;
+}
+#logo > a{
+    text-decoration: none;
+    color: var(--blue-twitter);
+    font-family: var(--main-font);
+}
+#nav-buttons-container{
+    display: none;
+}
+.nav-button{
+    text-decoration: none;
+    color: var(--extra-extra-light-gray);
+    padding: 0 1px 2px 1px;
+    position: relative;
+}
+.nav-button::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 0.5px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--extra-extra-light-gray);
+    transform-origin: bottom left;
+    transition: transform 0.5s ease-in;
+}
+
+.nav-button:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+/* ------------ drop down ------------ */
+.dropbtn{
+    background: none;
+    color: var(--extra-extra-light-gray);
+    padding: 6px 12px 6px 12px;
+    border: none;
+    cursor: pointer;
+    margin-right: var(--margin-mobile);
+}
+.open::before{
+    content: "Menu";
+}
+.close::before{
+    content: "Close";
+}
+
+.dropdown-content{
+    display: none;
+    position: fixed;
+    background-color: var(--black-twitter);
+    min-width: 100%;
+    overflow: hidden;
+    z-index: 1;
+    height: 100vh;
+    top: 0;
+    margin-top: 68px;
+}
+#menu-dropdown > a{
+    color: var(--extra-extra-light-gray);
+    margin: 5px 10px 5px 10px;
+    font-family: var(--main-font);
+}
+#menu-dropdown > hr{
+    color: var(--extra-extra-light-gray);
+    background-color: var(--extra-extra-light-gray);
+    margin: 0 20px 0 20px;
+    border: none;
+    height: 1px;
+}
+.dropdown-content a{
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown a:hover{
+    background-color: #ddd;
+}
+.show {
+    display: block;
+}
+/* ------------ end drop down ------------ */
+
+/* ------------------------------ end nav bar ------------------------------ */
+
+#footer{
+    width: 100%;
+    padding: 15px 0 15px 0;
+    text-align: center;
+}
+#footer p{
+    font-family: var(--main-font);
+    color: var(--dark-gray-twiiter);
+}
+
+@media (min-width: 769px){
+
+    /* ------------------------- nav bar ------------------------- */
+    #nav-container{
+        margin-left: var(--margin-pc);
+    }
+    #nav-sticky{
+        padding: 25px 0 25px 0;
+    }
+    #nav-buttons-container{
+        display: flex;
+        margin-right: var(--margin-pc);
+        gap: 68px;
+    }
+    #menu-dropdown-btn{
+        display: none;
+    }
+    /* -------------------------  end nav bar ------------------------- */
+}

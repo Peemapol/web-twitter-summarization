@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Twitter Summary</title>
+{% endblock %}
+
+{% block body %}
+
+<div id="main-body-container">
+
+  <div id="description-container">
+    <p id="home-header">Get Your <span>Tweet</span><br>Summarized</p>
+    <p class="description">Get your Twitter hashtag summarized now! Simply input the hashtag you want to explore, and we will generate a concise summary for you. Need inspiration? Choose from the quick search section below to discover popular hashtags ready to be summarized.</p>
+  </div>
+  
+  <div id="form-container">
+    <form method="POST" id="main-form">
+      <input type="text" name="hashtag" id="hashtag" placeholder="#hashtag" class="text-input" required>
+      <br><br>
+      <div id="advance-search-container">
+        <input type="text" name="number_of_tweets" id="number_of_tweets" placeholder="Number of Tweets" class="text-input">
+        <br><br>
+        <div id="checkbox-container">
+          <input type="checkbox" class="checkbox" name="snscrape" id="snscrape" value="True" checked>
+          <label for="top">SNscrape</label>
+          <input type="checkbox" class="checkbox" name="selenium" id="selenium" value="True">
+          <label for="latest">Selenium</label>
+        </div>
+        <!-- <p>date (if not input will choose most recent tweets)</p> -->
+        <div id="from-date">
+          <p>From</p>
+          <input type="date" name="tweet_date_early" id="tweet_date_early">
+        </div>
+        <div id="to-date">
+          <p>To</p>
+          <input type="date" name="tweet_date_later" id="tweet_date_later">
+        </div>
+      </div>
+      <p id="advance-search-button" class="advance-close">Advance Search</p>
+      
+      <br><br>
+      <input type="submit" value="Go" class="go-btn" id="submit-main-form">
+    </form>
+  </div>
+
+  <div id="progressbar-container">
+    <div id="progress-text-container"><p id="progress-text">fetching tweets...</p></div>
+    <div id="main-progressbar-bg">
+      <div id="main-progressbar"></div>
+    </div>
+  </div>
+</div>
+
+<div id="basic-info">
+  <p id="input-hashtag-is" class="basic-info-p">Your input is </p>
+  <br>
+
+  <div id="ai-sum-middle">
+    <div id="ai-sum-container">
+      <div id="ai-sum-head">
+        <p>AI Summary</p>
+      </div>
+      <div id="username-sum-container">
+        <div id="sum-pic">
+          SB
+        </div>
+        <div id="username-sum">
+          <p>sum bot</p>
+        </div>
+        <div id="at-username-sum">
+          <p>@sum_bot_AI</p>
+        </div>
+      </div>
+      <div id="ai-sum-body">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat veniam nostrum in nam sapiente provident modi, quisquam consequuntur nesciunt quae omnis enim recusandae reiciendis assumenda! Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, ex?
+        </p> 
+      </div>
+      <p id="bot-tweet-date">
+        22:34 · 10/5/2022
+      </p>
+    </div>
+  </div>
+  
+  <br>
+  <p class="basic-info-p">Top 5 tweets</p>
+  <div id="embeded-container">
+  </div>
+</div>
+
+
+
+
+<table id="tweet-table"></table>
+
+<p class="qucik-search-title">Quick Search</p>
+<div id="quick-search-container">
+  {% for news_hashtag in news_hashtags %}
+    <p class="news-hashtags">{{news_hashtag}}</p>
+  {% endfor %}
+</div>
+
+
+<script src="{{ url_for('static', filename='js/advance.js') }}"></script>
+<script src="{{ url_for('static', filename='js/checkbox.js') }}"></script>
+<script src="{{ url_for('static', filename='js/progressbar.js') }}"></script>
+{% endblock %}
