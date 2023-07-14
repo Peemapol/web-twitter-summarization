@@ -204,9 +204,12 @@ def handle_form_submit(data):
     # display(final_df['retweet_count'])
 
     embedded_links = list(final_df['link'])
-    socketio.emit("taskName", "getting embedded tweets..", to=socketid)
+    embeded_tweets = []
     socketio.emit("update progress", 85, to=socketid)
-    embeded_tweets = ts.getEmbeddedTweet(driver, embedded_links)
+    # embeded_tweets = ts.getEmbeddedTweet(driver, embedded_links)
+    for link in embedded_links:
+        embeded_tweets.append('<blockquote class="twitter-tweet"><a href="{}"></a></blockquote>'.format(link))
+    socketio.emit("taskName", "getting embedded tweets..", to=socketid)
     final_retweets = list(final_df['retweet_count'])
     final_likes = list(final_df['like_count'])
 
@@ -242,7 +245,11 @@ def quickSearch(data):
     embedded_links = list(topFive_df['tweet_link'])
     socketio.emit("taskName", "getting embeded tweets..", to=socketid)
     socketio.emit("update progress", 50, to=socketid)
-    embeded_tweets = ts.getEmbeddedTweet(driver, embedded_links)
+    # embeded_tweets = ts.getEmbeddedTweet(driver, embedded_links)
+    embeded_tweets = []
+    for link in embedded_links:
+        embeded_tweets.append('<blockquote class="twitter-tweet"><a href="{}"></a></blockquote>'.format(link))
+    socketio.emit("taskName", "getting embedded tweets..", to=socketid)
     final_retweets = list(topFive_df['retweet_count'])
     final_likes = list(topFive_df['like_count'])
     socketio.emit("taskName", "DONE", to=socketid)
