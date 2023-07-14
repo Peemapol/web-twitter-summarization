@@ -1,6 +1,7 @@
 const socket = io();
 let socketid = undefined;
-socket.connect("https://localhost:5000");
+const port = process.env.PORT || 80
+socket.connect(port);
 socket.on("connect", function(){
     socketid = socket.id;
     console.log('connected');
