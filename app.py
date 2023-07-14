@@ -83,6 +83,8 @@ def handle_form_submit(data):
     options.add_argument("--window-size=%s" % WINDOW_SIZE) # for starting with no window
     options.add_argument("headless") # for starting with no window
     options.add_argument('log-level=3')
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--no-sandbox")
     PATH = "function\scrape\driver\chromedriver.exe"
     options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
     
@@ -232,11 +234,13 @@ def quickSearch(data):
     options.add_argument("--window-size=%s" % WINDOW_SIZE) # for starting with no window
     options.add_argument("headless") # for starting with no window
     options.add_argument('log-level=3')
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--no-sandbox")
     options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
     PATH = "function\scrape\driver\chromedriver.exe"
     
     driver = webdriver.Chrome(options=options, executable_path=os.environ.get("CHROMEDRIVER_PATH"))
-    # driver = webdriver.Chrome(options=options, executable_path=PATH) to use localy
+    # driver = webdriver.Chrome(options=options, executable_path=PATH) #to use localy
     
     socketio.emit("taskName", "getting tweets..", to=socketid)
     socketio.emit("update progress", 20, to=socketid)
