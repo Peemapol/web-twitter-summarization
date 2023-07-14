@@ -7,6 +7,19 @@ socket.on("connect", function(){
     console.log(socketid);
 })
 
+socket.on("message", function(message) {
+    console.log("Received message: " + message);
+    // Handle the received message from the Socket.IO server
+});
+
+socket.on("disconnect", function() {
+    console.log("Socket.IO connection closed.");
+});
+
+socket.on("error", function(error) {
+    console.error("Socket.IO error:", error);
+});
+
 let progress_container = document.getElementById("progressbar-container");
 let progress = document.getElementById("main-progressbar");
 let information = document.getElementById("basic-info");
