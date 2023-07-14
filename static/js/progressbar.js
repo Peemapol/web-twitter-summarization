@@ -1,6 +1,6 @@
 const socket = io();
 let socketid = undefined;
-socket.connect("https://https://twitter-summarization-96cc58b75ed0.herokuapp.com/");
+socket.connect("https://twitter-summarization-96cc58b75ed0.herokuapp.com/");
 socket.on("connect", function(){
     socketid = socket.id;
     console.log('connected');
