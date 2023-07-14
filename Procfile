@@ -1,1 +1,1 @@
-web: uwsgi --http :$PORT --gevent 100 --module app:app
+web: gunicorn --worker-class gevent --bind 0.0.0.0:$PORT app:app
