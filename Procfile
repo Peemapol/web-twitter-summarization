@@ -1,1 +1,1 @@
-web: gunicorn --worker-class gevent --bind 0.0.0.0:$PORT app:app
+web: daphne -b 0.0.0.0 -p $PORT app:app
