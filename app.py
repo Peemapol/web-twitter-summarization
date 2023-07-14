@@ -74,82 +74,82 @@ def handle_form_submit(data):
     
     query = get_query(hashtag, early_tweet_date=tweet_date_early, later_tweet_date=tweet_date_later)
     
-    URL = "https://twitter.com/i/flow/login"
-    WINDOW_SIZE = "1920,1080" # for starting with no window
-    options = webdriver.ChromeOptions()
-    options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-    options.add_experimental_option("detach", True)
-    # options.add_argument("start-maximized")
-    options.add_argument("disable-extensions")
-    options.add_argument("--window-size=%s" % WINDOW_SIZE) # for starting with no window
-    options.add_argument("headless") # for starting with no window
-    options.add_argument('log-level=3')
-    options.add_argument("--disable-dev-shm-usage")
-    options.add_argument("--no-sandbox")
-    PATH = "function\scrape\driver\chromedriver.exe"
+    # URL = "https://twitter.com/i/flow/login"
+    # WINDOW_SIZE = "1920,1080" # for starting with no window
+    # options = webdriver.ChromeOptions()
+    # options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    # options.add_experimental_option("detach", True)
+    # # options.add_argument("start-maximized")
+    # options.add_argument("disable-extensions")
+    # options.add_argument("--window-size=%s" % WINDOW_SIZE) # for starting with no window
+    # options.add_argument("headless") # for starting with no window
+    # options.add_argument('log-level=3')
+    # options.add_argument("--disable-dev-shm-usage")
+    # options.add_argument("--no-sandbox")
+    # PATH = "function\scrape\driver\chromedriver.exe"
     
-    driver = webdriver.Chrome(options=options, executable_path=os.environ.get("CHROMEDRIVER_PATH"))
-    # driver = webdriver.Chrome(options=options, executable_path=PATH) to use localy
+    # driver = webdriver.Chrome(options=options, executable_path=os.environ.get("CHROMEDRIVER_PATH"))
+    # # driver = webdriver.Chrome(options=options, executable_path=PATH) to use localy
     
-    if selenium:
-        # driver = ts.get_driver
-        socketio.emit("update progress", 2, to=socketid)
-        socketio.emit("taskName", "log in..", to=socketid)
-        ts.login(driver, URL)
-        time.sleep(3)
-        socketio.emit("update progress", 5, to=socketid)
-        socketio.emit("taskName", "search query..", to=socketid)
+    # if selenium:
+    #     # driver = ts.get_driver
+    #     socketio.emit("update progress", 2, to=socketid)
+    #     socketio.emit("taskName", "log in..", to=socketid)
+    #     ts.login(driver, URL)
+    #     time.sleep(3)
+    #     socketio.emit("update progress", 5, to=socketid)
+    #     socketio.emit("taskName", "search query..", to=socketid)
         
-        ts.search(query, driver)
-        time.sleep(3)
+    #     ts.search(query, driver)
+    #     time.sleep(3)
         
-        links = []
+    #     links = []
     
-        socketio.emit("taskName", "searching through top tweets..", to=socketid)
-        print("searching through top tweets..")
-        y = 0
-        new_height = 0
-        scroll_pause_time = 0.8
-        progress = 0
-        while True:
-            links, new_height, y  = ts.scrapeTweetLink(driver, links, y, scroll_pause_time)
-            socketio.emit("update progress", 5+(progress/4), to=socketid)
-            progress +=1
-            if(y>new_height):
-                break
-            # if(progress>5): 
-            #     break
-            if(progress>100): 
-                break
+    #     socketio.emit("taskName", "searching through top tweets..", to=socketid)
+    #     print("searching through top tweets..")
+    #     y = 0
+    #     new_height = 0
+    #     scroll_pause_time = 0.8
+    #     progress = 0
+    #     while True:
+    #         links, new_height, y  = ts.scrapeTweetLink(driver, links, y, scroll_pause_time)
+    #         socketio.emit("update progress", 5+(progress/4), to=socketid)
+    #         progress +=1
+    #         if(y>new_height):
+    #             break
+    #         # if(progress>5): 
+    #         #     break
+    #         if(progress>100): 
+    #             break
             
-        socketio.emit("update progress", 25, to=socketid)
+    #     socketio.emit("update progress", 25, to=socketid)
     
-        socketio.emit("taskName", "searching through latest tweets..", to=socketid)
-        ts.clickLastest(driver)
-        time.sleep(3)
-        print("searching through latest tweets..")
-        y = 0
-        new_height = 0
-        scroll_pause_time = 0.5
-        for i in range(0,n_tweets):
-            links, new_height, y = ts.scrapeTweetLink(driver, links, y, scroll_pause_time)
-            socketio.emit("update progress", 25+(i*25/n_tweets), to=socketid)
-            if(y>new_height):
-                break
-        print("sort links")
-        links = list(dict.fromkeys(links))
-        links[:] = [url for url in links if "status" in url]
+    #     socketio.emit("taskName", "searching through latest tweets..", to=socketid)
+    #     ts.clickLastest(driver)
+    #     time.sleep(3)
+    #     print("searching through latest tweets..")
+    #     y = 0
+    #     new_height = 0
+    #     scroll_pause_time = 0.5
+    #     for i in range(0,n_tweets):
+    #         links, new_height, y = ts.scrapeTweetLink(driver, links, y, scroll_pause_time)
+    #         socketio.emit("update progress", 25+(i*25/n_tweets), to=socketid)
+    #         if(y>new_height):
+    #             break
+    #     print("sort links")
+    #     links = list(dict.fromkeys(links))
+    #     links[:] = [url for url in links if "status" in url]
         
-        df = pd.DataFrame(columns=['date','content','username','like_count','retweet_count','quote_count','bookmark_count', 'link'])
+    #     df = pd.DataFrame(columns=['date','content','username','like_count','retweet_count','quote_count','bookmark_count', 'link'])
     
-        socketio.emit("taskName", "scraping..", to=socketid)
-        print("scraping links")
-        for i, link in enumerate(links):
-            socketio.emit("update progress", 50+(i*25/len(links)), to=socketid)
-            try:
-                df = ts.searchLink(driver, link, df)
-            except: continue
-        df['hashtag'] = hashtag
+    #     socketio.emit("taskName", "scraping..", to=socketid)
+    #     print("scraping links")
+    #     for i, link in enumerate(links):
+    #         socketio.emit("update progress", 50+(i*25/len(links)), to=socketid)
+    #         try:
+    #             df = ts.searchLink(driver, link, df)
+    #         except: continue
+    #     df['hashtag'] = hashtag
 
     # tweets = list(df['content'])
     # df.to_csv('test.csv')
@@ -211,7 +211,9 @@ def handle_form_submit(data):
     embedded_links = list(final_df['link'])
     socketio.emit("taskName", "getting embedded tweets..", to=socketid)
     socketio.emit("update progress", 85, to=socketid)
-    embeded_tweets = ts.getEmbeddedTweet(driver, embedded_links)
+    embeded_tweets = []
+    for link in embedded_links:
+        embeded_tweets.append('<blockquote class="twitter-tweet"><a href="{}"></a></blockquote>'.format(link))
     final_retweets = list(final_df['retweet_count'])
     final_likes = list(final_df['like_count'])
 
@@ -227,20 +229,20 @@ def quickSearch(data):
     hashtag = data['hashtag']
     socketid = data['socketid']
     
-    WINDOW_SIZE = "1920,1080" # for starting with no window
-    options = webdriver.ChromeOptions()
-    options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-    options.add_experimental_option("detach", True)
-    options.add_argument("disable-extensions")
-    options.add_argument("--window-size=%s" % WINDOW_SIZE) # for starting with no window
-    options.add_argument("headless") # for starting with no window
-    options.add_argument('log-level=3')
-    options.add_argument("--disable-dev-shm-usage")
-    options.add_argument("--no-sandbox")
-    PATH = "function\scrape\driver\chromedriver.exe"
+    # WINDOW_SIZE = "1920,1080" # for starting with no window
+    # options = webdriver.ChromeOptions()
+    # options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    # options.add_experimental_option("detach", True)
+    # options.add_argument("disable-extensions")
+    # options.add_argument("--window-size=%s" % WINDOW_SIZE) # for starting with no window
+    # options.add_argument("headless") # for starting with no window
+    # options.add_argument('log-level=3')
+    # options.add_argument("--disable-dev-shm-usage")
+    # options.add_argument("--no-sandbox")
+    # PATH = "function\scrape\driver\chromedriver.exe"
     
-    driver = webdriver.Chrome(options=options, executable_path=os.environ.get("CHROMEDRIVER_PATH"))
-    # driver = webdriver.Chrome(options=options, executable_path=PATH) #to use localy
+    # driver = webdriver.Chrome(options=options, executable_path=os.environ.get("CHROMEDRIVER_PATH"))
+    # # driver = webdriver.Chrome(options=options, executable_path=PATH) #to use localy
     
     socketio.emit("taskName", "getting tweets..", to=socketid)
     socketio.emit("update progress", 20, to=socketid)
@@ -252,7 +254,10 @@ def quickSearch(data):
     embedded_links = list(topFive_df['tweet_link'])
     socketio.emit("taskName", "getting embeded tweets..", to=socketid)
     socketio.emit("update progress", 50, to=socketid)
-    embeded_tweets = ts.getEmbeddedTweet(driver, embedded_links)
+    # embeded_tweets = ts.getEmbeddedTweet(driver, embedded_links)
+    embeded_tweets = []
+    for link in embedded_links:
+        embeded_tweets.append('<blockquote class="twitter-tweet"><a href="{}"></a></blockquote>'.format(link))
     final_retweets = list(topFive_df['retweet_count'])
     final_likes = list(topFive_df['like_count'])
     socketio.emit("taskName", "DONE", to=socketid)
