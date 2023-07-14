@@ -270,4 +270,4 @@ def quickSearch(data):
     socketio.emit("createEmbeded", {'embededHtml':embeded_tweets, 'reTweetCount': final_retweets, 'likeCount': final_likes}, to=socketid)
     
 if __name__ == "__main__":
-    socketio.run(app=app, debug=True)
+    socketio.run(app, port=int(os.environ.get('PORT', 5000)))
