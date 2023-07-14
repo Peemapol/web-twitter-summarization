@@ -1,1 +1,1 @@
-web: daphne -b 0.0.0.0 -p $PORT app:app
+web: uwsgi --http :$PORT --gevent 100 --module app:app
