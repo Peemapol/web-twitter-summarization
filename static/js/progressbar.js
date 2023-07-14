@@ -24,6 +24,8 @@ socket.on("update progress", function(percent){
 let mainForm = document.getElementById("main-form");
 mainForm.addEventListener('submit', event => {
     console.log("catch onsubmit");
+    alert('this function is disabled right not!')
+    return
     event.preventDefault();
     goBtn.style.backgroundColor = 'var(--light-gray-twitter)';
     goBtn.disabled = true;

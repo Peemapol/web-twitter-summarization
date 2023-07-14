@@ -10,6 +10,8 @@ import pandas as pd
 from selenium import webdriver
 from IPython.display import display
 import math
+import requests
+import json
 # from function.twitter_summary.summary import summarise
 # from flask_sqlalchemy import SQLAlchemy
 
@@ -39,6 +41,23 @@ def progress():
 
 @socketio.on('formSubmit')
 def handle_form_submit(data):
+    # url = "https://apps.beam.cloud/52k08"
+    # payload = {"text": "This is Beam!"}
+    # headers = {
+    # "Accept": "/",
+    # "Accept-Encoding": "gzip, deflate",
+    # "Authorization": "Basic N2VkMWE1ZjY5ZjhiYzZjYzdlMzE0ZWVmMDc2YTIyNGI6YmI0NTY5OTBkYzI2MzNlODc2NzMzZTRkZDRiNGIwMTQ=",
+    # "Connection": "keep-alive",
+    # "Content-Type": "application/json"
+    # }
+
+    # response = requests.request("POST", url, 
+    # headers=headers,
+    # data=json.dumps(payload)
+    # )
+
+    # print(response.json())
+    # -----------------------------------------------
     hashtag = data['hashtag']
     n_tweet = data['n_tweets']
     if n_tweet is None:
