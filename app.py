@@ -1,6 +1,7 @@
 # to activate env write this in terminal (comand prompt) env\Scripts\activate.bat
 from flask import Flask, render_template, url_for, request, Response
 from flask_socketio import SocketIO, emit
+from flask_cors import CORS
 from asyncio import sleep
 import snscrape.modules.twitter as sntwitter
 from function.scrapeTweet import get_query
@@ -16,6 +17,7 @@ import json
 # from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
+CORS(app)
 # app.config['SQLALCHEMY_DATABASE_URI']
 socketio = SocketIO(app)
 
