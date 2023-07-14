@@ -1,7 +1,6 @@
 const socket = io();
 let socketid = undefined;
-const port = process.env.PORT || 80
-socket.connect(port);
+socket.connect("https://https://twitter-summarization-96cc58b75ed0.herokuapp.com/");
 socket.on("connect", function(){
     socketid = socket.id;
     console.log('connected');

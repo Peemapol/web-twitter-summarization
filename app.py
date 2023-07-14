@@ -1,6 +1,7 @@
 # to activate env write this in terminal (comand prompt) env\Scripts\activate.bat
 from flask import Flask, render_template, url_for, request, Response
 from flask_socketio import SocketIO, emit
+from flask_cors import CORS
 from asyncio import sleep
 import snscrape.modules.twitter as sntwitter
 from function.scrapeTweet import get_query
@@ -17,6 +18,7 @@ import json
 # from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
+CORS(app)
 # app.config['SQLALCHEMY_DATABASE_URI']
 socketio = SocketIO(app)
 
@@ -209,11 +211,13 @@ def handle_form_submit(data):
     # display(final_df['retweet_count'])
 
     embedded_links = list(final_df['link'])
-    socketio.emit("taskName", "getting embedded tweets..", to=socketid)
-    socketio.emit("update progress", 85, to=socketid)
     embeded_tweets = []
+    socketio.emit("update progress", 85, to=socketid)
+    # embeded_tweets = ts.getEmbeddedTweet(driver, embedded_links)
     for link in embedded_links:
         embeded_tweets.append('<blockquote class="twitter-tweet"><a href="{}"></a></blockquote>'.format(link))
+    socketio.emit("taskName", "getting embedded tweets..", to=socketid)
+    socketio.emit("update progress", 85, to=socketid)
     final_retweets = list(final_df['retweet_count'])
     final_likes = list(final_df['like_count'])
 
@@ -258,6 +262,7 @@ def quickSearch(data):
     embeded_tweets = []
     for link in embedded_links:
         embeded_tweets.append('<blockquote class="twitter-tweet"><a href="{}"></a></blockquote>'.format(link))
+    socketio.emit("taskName", "getting embedded tweets..", to=socketid)
     final_retweets = list(topFive_df['retweet_count'])
     final_likes = list(topFive_df['like_count'])
     socketio.emit("taskName", "DONE", to=socketid)
