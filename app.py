@@ -77,6 +77,7 @@ def handle_form_submit(data):
     URL = "https://twitter.com/i/flow/login"
     WINDOW_SIZE = "1920,1080" # for starting with no window
     options = webdriver.ChromeOptions()
+    options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
     options.add_experimental_option("detach", True)
     # options.add_argument("start-maximized")
     options.add_argument("disable-extensions")
@@ -86,7 +87,6 @@ def handle_form_submit(data):
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--no-sandbox")
     PATH = "function\scrape\driver\chromedriver.exe"
-    options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
     
     driver = webdriver.Chrome(options=options, executable_path=os.environ.get("CHROMEDRIVER_PATH"))
     # driver = webdriver.Chrome(options=options, executable_path=PATH) to use localy
@@ -229,6 +229,7 @@ def quickSearch(data):
     
     WINDOW_SIZE = "1920,1080" # for starting with no window
     options = webdriver.ChromeOptions()
+    options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
     options.add_experimental_option("detach", True)
     options.add_argument("disable-extensions")
     options.add_argument("--window-size=%s" % WINDOW_SIZE) # for starting with no window
@@ -236,7 +237,6 @@ def quickSearch(data):
     options.add_argument('log-level=3')
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--no-sandbox")
-    options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
     PATH = "function\scrape\driver\chromedriver.exe"
     
     driver = webdriver.Chrome(options=options, executable_path=os.environ.get("CHROMEDRIVER_PATH"))
