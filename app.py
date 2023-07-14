@@ -19,6 +19,7 @@ import json
 app = Flask(__name__)
 # app.config['SQLALCHEMY_DATABASE_URI']
 socketio = SocketIO(app)
+socketio.run(app, port=int(os.environ.get('PORT', 5000)))
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
