@@ -13,6 +13,12 @@ import math
 import os
 import requests
 import json
+
+# Function for performing summary
+from function.summ.preprocess import clean_scraped
+from function.summ.kl_topic_modeling import pipeline
+from function.summ.textrank import batch_prepared
+from function.summ.summary import summarise
 # from function.twitter_summary.summary import summarise
 # from flask_sqlalchemy import SQLAlchemy
 
@@ -202,7 +208,6 @@ def handle_form_submit(data):
         
     socketio.emit("taskName", "generating summary..", to=socketid)
     # summary = summarise(df, with_cluster=True)
-    # socketio.emit("aiSum", summary, to=socketid)
     socketio.emit("update progress", 75, to=socketid)
     final_df = df.sort_values(['retweet_count'], ascending=[False])
     final_df = final_df.head(5)
@@ -264,6 +269,25 @@ def quickSearch(data):
     socketio.emit("taskName", "getting embedded tweets..", to=socketid)
     final_retweets = list(topFive_df['retweet_count'])
     final_likes = list(topFive_df['like_count'])
+
+    # For summarizing
+    # Clean the scraped data
+    data = clean_scraped(hashtag_df)
+    # Use kl topic model
+    cluster = pipeline(data)
+    # Preprocess the cluster into batch
+    batches = batch_prepared(cluster, batch_size=1, method='tfidf', separator='<\s>')
+    # For each batch, get the summary
+    summaries = ''
+    for b in batches:
+        s = summarise(b)['response']
+        # Join to be string
+        s = ' '.join(s)+ ' '
+        summaries += s
+    summaries = summaries.strip()
+
+    socketio.emit("aiSum", summaries, to=socketid)
+
     socketio.emit("taskName", "DONE", to=socketid)
     socketio.emit("update progress", 100, to=socketid)
     socketio.emit("createEmbeded", {'embededHtml':embeded_tweets, 'reTweetCount': final_retweets, 'likeCount': final_likes}, to=socketid)

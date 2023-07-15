@@ -136,3 +136,8 @@ $(document).ready(function() {
         socket.emit('quickSearch', { hashtag: hashtag, socketid: socketid });
     });
 });
+
+socket.on('aiSum', function(summary){
+    const aiSummary = document.getElementById('ai-sum-text');
+    aiSummary.innerText = summary;
+})
