@@ -131,10 +131,25 @@ $(document).ready(function() {
         goBtn.style.backgroundColor = 'var(--light-gray-twitter)';
         goBtn.disabled = true;
         const hashtag = $(this).text();
+        var kl = true;
+        var bert = false;
+        var model_name = ''
+        if ($('#kl').is(":checked")){
+            kl = true;
+            model_name = 'KL mLongT5';
+            console.log("using kl");
+        }
+        else if ($('#bert').is(":checked")){
+            bert = true;
+            kl = false;
+            model_name = 'Bert mLongT5';
+            console.log("using bert")
+        }
+        document.getElementById('model-name').innerText = model_name;
         document.getElementById('input-hashtag-is').innerText = 'Quick search hashtag is ' + hashtag;
         document.getElementById("progress-text").classList.add("animate-flicker");
         $("html, body").animate({ scrollTop: 0 }, "slow");
-        socket.emit('quickSearch', { hashtag: hashtag, socketid: socketid });
+        socket.emit('quickSearch', { hashtag: hashtag, kl: kl, bert: bert, socketid: socketid });
     });
 });
 

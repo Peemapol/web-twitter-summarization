@@ -236,6 +236,8 @@ def handle_form_submit(data):
 def quickSearch(data):
     hashtag = data['hashtag']
     socketid = data['socketid']
+    kl = data['kl']
+    bert = data['bert']
     
     # WINDOW_SIZE = "1920,1080" # for starting with no window
     # options = webdriver.ChromeOptions()
@@ -282,13 +284,18 @@ def quickSearch(data):
     batches = batch_prepared(cluster, batch_size=1, method='tfidf', separator='<\s>')
     # For each batch, get the summary
     summaries = ''
-    for b in batches:
-        s = eval(summarise(b)['response'])
-        # Join to be string
-        s = ' '.join(s)+ ' '
-        summaries += s
+    if kl:
+        for b in batches:
+            s = eval(summarise(b)['response'])
+            # Join to be string
+            s = ' '.join(s)+ ' '
+            summaries += s
+            
+        summaries = summaries.strip()
         
-    summaries = summaries.strip()
+    if bert:
+        print('beam')
+        #write bert code here with summaries as output
 
     socketio.emit("aiSum", summaries, to=socketid)
 

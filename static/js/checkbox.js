@@ -1,3 +1,8 @@
+$(".checkbox").change(function() {
+    $(".checkbox").prop('checked', false);
+    $(this).prop('checked', true);
+});
+
 $(document).ready(function () {
     $('#submit-main-form').click(function() {
         var checked = $("input[type=checkbox]:checked").length;
