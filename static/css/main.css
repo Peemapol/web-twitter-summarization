@@ -142,12 +142,17 @@ input[type="date"]{
     border: none;
     border-radius: 20px;
     font-family: var(--main-font);
-    cursor: pointer;
+    cursor: default; /* change back to pointer when function is back running*/
 }
 /* this is also disabled */
 /* .go-btn:hover{
     background-color: var(--hover-blue-twitter);
 } */
+#warning{
+    color: red;
+    font-size: 0.5rem;
+    font-family: var(--main-font);
+}
 
 #progressbar-container{
     margin: 20px 0 20px 0;
