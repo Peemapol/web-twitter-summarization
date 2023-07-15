@@ -346,7 +346,7 @@ input[type="date"]{
     font-family: var(--main-font);
     font-size: 1.5rem;
     margin-left: var(--margin-mobile);
-    margin-bottom: 20px;
+    margin: 20px 0 20px 0;
 }
 
 @media (min-width: 769px){
@@ -505,5 +505,6 @@ input[type="date"]{
     .qucik-search-title {
         font-size: 3rem;
         margin-left: var(--margin-basic-info-pc);
+        margin-top: 0;
     }
 }
