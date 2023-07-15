@@ -280,10 +280,11 @@ def quickSearch(data):
     # For each batch, get the summary
     summaries = ''
     for b in batches:
-        s = summarise(b)['response']
+        s = eval(summarise(b)['response'])
         # Join to be string
         s = ' '.join(s)+ ' '
         summaries += s
+        
     summaries = summaries.strip()
 
     socketio.emit("aiSum", summaries, to=socketid)
