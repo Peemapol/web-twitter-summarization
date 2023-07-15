@@ -138,11 +138,12 @@ input[type="date"]{
     padding: 5px 10px 5px 10px;
     width: 20%;
     background-color: var(--blue-twitter);
-    color: var(--extra-extra-light-gray);
+    color: var(--light-gray-twitter); /* disable go button change back to blu twitter when not disabled*/
     border: none;
     border-radius: 20px;
     font-family: var(--main-font);
     cursor: pointer;
+    
 }
 .go-btn:hover{
     background-color: var(--hover-blue-twitter);
@@ -327,7 +328,6 @@ input[type="date"]{
     margin: 0 var(--margin-mobile) 0 var(--margin-mobile);
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
 }
 .news-hashtags{
     color: var(--extra-extra-light-gray);
@@ -500,6 +500,7 @@ input[type="date"]{
     #quick-search-container{
         margin: 0 var(--margin-basic-info-pc) 0 var(--margin-basic-info-pc);
         width: calc(100% - 2*var(--margin-basic-info-pc));
+        justify-content: space-between;
     }
     .qucik-search-title {
         font-size: 3rem;

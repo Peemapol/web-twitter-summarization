@@ -114,9 +114,9 @@ socket.on('createEmbeded', data => {
     $.getScript('static\\js\\countUp.js');
     $.getScript('static\\js\\dateTime.js');
     information.style.display = "block";
-    goBtn.disabled = false;
     document.getElementById('quick-search-container').style.pointerEvents = 'auto';
-    goBtn.style.backgroundColor = 'var(--blue-twitter)';
+    // goBtn.disabled = false;
+    // goBtn.style.backgroundColor = 'var(--blue-twitter)';
 })
 
 socket.on('taskName', function(task){
@@ -125,6 +125,7 @@ socket.on('taskName', function(task){
 })
 
 $(document).ready(function() {
+    goBtn.disabled = true; //disabled go button
     $('p.news-hashtags').click(function() {
         document.getElementById('quick-search-container').style.pointerEvents = 'none';
         goBtn.style.backgroundColor = 'var(--light-gray-twitter)';
