@@ -137,17 +137,17 @@ input[type="date"]{
 .go-btn{
     padding: 5px 10px 5px 10px;
     width: 20%;
-    background-color: var(--blue-twitter);
-    color: var(--light-gray-twitter); /* disable go button change back to blu twitter when not disabled*/
+    background-color: var(--light-gray-twitter); /* disable go button change back to blu twitter when not disabled*/
+    color: var(--extra-extra-light-gray); 
     border: none;
     border-radius: 20px;
     font-family: var(--main-font);
     cursor: pointer;
-    
 }
-.go-btn:hover{
+/* this is also disabled */
+/* .go-btn:hover{
     background-color: var(--hover-blue-twitter);
-}
+} */
 
 #progressbar-container{
     margin: 20px 0 20px 0;
