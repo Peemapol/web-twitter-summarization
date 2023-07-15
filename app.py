@@ -19,6 +19,7 @@ from function.summ.preprocess import clean_scraped
 from function.summ.kl_topic_modeling import pipeline
 from function.summ.textrank import batch_prepared
 from function.summ.summary import summarise
+from function.summ.topic_bert import get_bert
 # from function.twitter_summary.summary import summarise
 # from flask_sqlalchemy import SQLAlchemy
 
@@ -279,19 +280,24 @@ def quickSearch(data):
     # Clean the scraped data
     data = clean_scraped(hashtag_df)
     # Use kl topic model
-    cluster = pipeline(data)
+    if kl:
+        cluster = pipeline(data)
+
+    # If Bertopic
+    elif bert:
+        cluster = eval(get_bert(data)['response'])
+        
     # Preprocess the cluster into batch
     batches = batch_prepared(cluster, batch_size=1, method='tfidf', separator='<\s>')
     # For each batch, get the summary
     summaries = ''
-    if kl:
-        for b in batches:
-            s = eval(summarise(b)['response'])
-            # Join to be string
-            s = ' '.join(s)+ ' '
-            summaries += s
-            
-        summaries = summaries.strip()
+    for b in batches:
+        s = eval(summarise(b)['response'])
+        # Join to be string
+        s = '\n'.join(['-'+sm for sm in s])+ '\n'
+        summaries += s
+        
+    summaries = summaries.strip()
         
     if bert:
         print('beam')

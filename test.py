@@ -4,19 +4,23 @@ from function.summ.kl_topic_modeling import pipeline
 from function.summ.textrank import batch_prepared
 from function.summ.summary import summarise
 import warnings
+from function.summ.topic_bert import get_bert
 
 warnings.filterwarnings('ignore')
 
-
+print("Reading File...")
 # Test for kl topic modeling
 df = pd.read_csv('static/data/news.csv')
 df = df[df['hashtag'] == '#บอสอยู่วิทยา']
 
 # Clean
+print("Cleaning Data...")
 clean = clean_scraped(df)
 
+print("Getting BERTopic cluster...")
 # Topic Modeling
-cluster = pipeline(clean)
+cluster = eval(get_bert(clean)['response'])
+print(cluster)
 print(len(cluster))
 
 # Test cluster preproces
@@ -27,10 +31,10 @@ print(len(batches))
 # Summarise
 summaries = ''
 for b in batches:
-    s = summarise(b)['response']
-    print(s)
+    s = eval(summarise(b)['response'])
     # Join to be string
-    s = ' '.join(s)+ ' '
+    s = '\n'.join(['-'+sm for sm in s])+ '\n'
+    print(s)
     summaries += s
 summaries = summaries.strip()
 
