@@ -148,11 +148,6 @@ input[type="date"]{
 /* .go-btn:hover{
     background-color: var(--hover-blue-twitter);
 } */
-#warning{
-    color: red;
-    font-size: 0.8rem;
-    font-family: var(--main-font);
-}
 
 #progressbar-container{
     margin: 20px 0 20px 0;
