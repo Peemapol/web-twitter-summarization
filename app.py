@@ -269,6 +269,9 @@ def quickSearch(data):
     socketio.emit("taskName", "getting embedded tweets..", to=socketid)
     final_retweets = list(topFive_df['retweet_count'])
     final_likes = list(topFive_df['like_count'])
+    
+    socketio.emit("taskName", "generating summary", to=socketid)
+    socketio.emit("update progress", 75, to=socketid)
 
     # For summarizing
     # Clean the scraped data
