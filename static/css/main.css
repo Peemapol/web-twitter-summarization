@@ -345,8 +345,7 @@ input[type="date"]{
     color: var(--extra-extra-light-gray);
     font-family: var(--main-font);
     font-size: 1.5rem;
-    margin-left: var(--margin-mobile);
-    margin: 20px 0 20px 0;
+    margin: 20px 0 20px var(--margin-mobile);
 }
 
 @media (min-width: 769px){
